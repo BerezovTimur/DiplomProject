@@ -1,6 +1,7 @@
 package ru.netology.web.data;
 
 import lombok.val;
+import org.apache.commons.dbutils.QueryRunner;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -11,8 +12,22 @@ public class SQLHelper {
     public static String login = "app";
     public static String password = "pass";
 
-    private static String getData(String sqlQuery, String column) throws SQLException {
+    public static void cleanTable() throws SQLException {
+        val runner = new QueryRunner();
+        val creditRequest = "DELETE FROM credit_request_entity";
+        val order = "DELETE FROM order_entity";
+        val payment = "DELETE FROM payment_entity";
 
+        try (
+                val conn = DriverManager.getConnection(mySqlUrl, login, password);
+        ) {
+            runner.update(conn, creditRequest);
+            runner.update(conn, order);
+            runner.update(conn, payment);
+        }
+    }
+
+    private static String getData(String sqlQuery, String column) throws SQLException {
         try (
                 val conn = DriverManager.getConnection(mySqlUrl, login, password);
                 val countStmt = conn.createStatement();
@@ -46,8 +61,4 @@ public class SQLHelper {
         val column = "transaction_id";
         return SQLHelper.getData(getStatus, column);
     }
-
-    /*public static void comparePaymentAndTransactionID() throws SQLException {
-        getPaymentID().equals(getTransactionID());
-    }*/
 }

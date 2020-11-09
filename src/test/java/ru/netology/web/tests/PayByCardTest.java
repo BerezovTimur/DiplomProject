@@ -7,13 +7,21 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import ru.netology.web.data.DataHelper;
+import ru.netology.web.data.SQLHelper;
 import ru.netology.web.pages.OrderPage;
+
+import java.sql.SQLException;
 
 public class PayByCardTest {
 
     @BeforeAll
     static void setUpAll() {
         SelenideLogger.addListener("allure", new AllureSelenide());
+    }
+
+    @BeforeAll
+    static void cleanTable() throws SQLException {
+        SQLHelper.cleanTable();
     }
 
     @AfterAll

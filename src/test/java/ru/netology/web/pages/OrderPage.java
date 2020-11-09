@@ -54,18 +54,18 @@ public class OrderPage {
     }
 
     public void wrongFormatMassage() {
-        wrongFormatMassage.waitUntil(Condition.visible, 15000);
+        wrongFormatMassage.shouldBe(Condition.visible);
     }
 
     public void wrongFormatForMonthMassage() {
-        wrongFormatForMonthMassage.waitUntil(Condition.visible, 15000);
+        wrongFormatForMonthMassage.shouldBe(Condition.visible);
     }
 
     public void invalidCardMassage() {
-        invalidCardMassage.waitUntil(Condition.visible, 15000);
+        invalidCardMassage.shouldBe(Condition.visible);
     }
 
     public void cardholderNameMassage() {
-        cardholderNameMassage.waitUntil(Condition.visible, 15000);
+        cardholderNameMassage.shouldBe(Condition.visible);
     }
 }
